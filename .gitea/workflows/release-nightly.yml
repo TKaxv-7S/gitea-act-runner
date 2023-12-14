@@ -2,41 +2,17 @@ name: release-nightly
 
 on:
   push:
-    branches: [main]
+    branches: [main_tk]
     tags:
       - "*"
 
 jobs:
-  goreleaser:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # all history for all branches and tags
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: "go.mod"
-      - name: goreleaser
-        uses: goreleaser/goreleaser-action@v5
-        with:
-          distribution: goreleaser-pro
-          version: latest
-          args: release --nightly
-        env:
-          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          S3_REGION: ${{ secrets.AWS_REGION }}
-          S3_BUCKET: ${{ secrets.AWS_BUCKET }}
-          GORELEASER_FORCE_TOKEN: "gitea"
-          GITEA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release-image:
     runs-on: ubuntu-latest
     container:
       image: catthehacker/ubuntu:act-latest
     env:
-      DOCKER_ORG: gitea
+      DOCKER_ORG: tkaxv7s
       DOCKER_LATEST: nightly
     steps:
       - name: Checkout

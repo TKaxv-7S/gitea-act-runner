@@ -5,6 +5,7 @@ RUN apk add --no-cache make git
 COPY . /opt/src/act_runner
 WORKDIR /opt/src/act_runner
 
+RUN go env -w GOPRIVATE=github.com/TKaxv-7S && go mod tidy
 RUN make clean && make build
 
 FROM alpine:3.18
