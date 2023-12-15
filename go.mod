@@ -98,4 +98,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/nektos/act => github.com/TKaxv-7S/gitea-act v0.261.2
+replace github.com/nektos/act => github.com/TKaxv-7S/gitea-act v0.261.2-TK
