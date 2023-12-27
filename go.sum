@@ -17,8 +17,8 @@ github.com/Microsoft/hcsshim v0.10.0-rc.8 h1:YSZVvlIIDD1UxQpJp0h+dnpLUw+TrY0cx8o
 github.com/Microsoft/hcsshim v0.10.0-rc.8/go.mod h1:OEthFdQv/AD2RAdzR6Mm1N1KPCztGKDurW1Z8b8VGMM=
 github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371 h1:kkhsdkhsCvIsutKu5zLMgWtgh9YxGCNAw8Ad8hjwfYg=
 github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371/go.mod h1:EjAoLdwvbIOoOQr3ihjnSoLZRtE8azugULFRteWMNc0=
-github.com/TKaxv-7S/gitea-act v0.251.1-tk-v2 h1:39KVShPbS09finjKoOPosUbl6G2J1LBNOJBqFbYOdec=
-github.com/TKaxv-7S/gitea-act v0.251.1-tk-v2/go.mod h1:CoaX2053jqBlD6JMgu4d4UgFL/rp2I14Kt5mMqcs0Z0=
+github.com/TKaxv-7S/gitea-act v0.251.1-tk-v3 h1:sFvREZDgF6/0gXwRJHUT9f1ftBD2E/zCIDspkCYvRDA=
+github.com/TKaxv-7S/gitea-act v0.251.1-tk-v3/go.mod h1:CoaX2053jqBlD6JMgu4d4UgFL/rp2I14Kt5mMqcs0Z0=
 github.com/acomagu/bufpipe v1.0.4 h1:e3H4WUzM3npvo5uv95QuJM3cQspFNtFBzvJ2oNjKIDQ=
 github.com/acomagu/bufpipe v1.0.4/go.mod h1:mxdxdup/WdsKVreO5GpW4+M/1CE2sMG4jeGJ2sYmHc4=
 github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be h1:9AeTilPcZAjCFIImctFaOjnTIavg87rW78vTPkQqLI8=
