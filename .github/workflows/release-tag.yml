@@ -1,8 +1,9 @@
-name: release-nightly
+name: release-tag
 
 on:
   push:
-    branches: [ main_tk ]
+    tags:
+      - '*'
 
 env:
   GOPATH: /go_path
@@ -10,12 +11,11 @@ env:
 
 jobs:
   release-image:
-    runs-on: azure-runner
+    runs-on: ubuntu-latest
     container:
       image: catthehacker/ubuntu:act-latest
     env:
-      DOCKER_ORG: tkaxv7s
-      DOCKER_LATEST: nightly
+      DOCKER_LATEST: latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,7 +50,8 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}
 
       - name: Build and push dind-rootless
         uses: docker/build-push-action@v5
@@ -64,4 +65,5 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}-dind-rootless
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}-dind-rootless
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}-dind-rootless
