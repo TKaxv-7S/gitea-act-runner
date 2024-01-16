@@ -11,7 +11,6 @@ jobs:
     container:
       image: catthehacker/ubuntu:act-latest
     env:
-      DOCKER_ORG: tkaxv7s
       DOCKER_LATEST: latest
     steps:
       - name: Checkout
@@ -47,8 +46,8 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}
 
       - name: Build and push dind-rootless
         uses: docker/build-push-action@v5
@@ -62,5 +61,5 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}-dind-rootless
-            ${{ env.DOCKER_ORG }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}-dind-rootless
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ steps.meta.outputs.REPO_VERSION }}-dind-rootless
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.REPO_NAME }}:${{ env.DOCKER_LATEST }}-dind-rootless
