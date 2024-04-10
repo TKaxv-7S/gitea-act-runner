@@ -13,7 +13,7 @@ import (
 	"time"
 
 	runnerv1 "code.gitea.io/actions-proto-go/runner/v1"
-	"github.com/bufbuild/connect-go"
+	"connectrpc.com/connect"
 	"github.com/docker/docker/api/types/container"
 	"github.com/nektos/act/pkg/artifactcache"
 	"github.com/nektos/act/pkg/common"
@@ -183,7 +183,7 @@ func (r *Runner) run(ctx context.Context, task *runnerv1.Task, reporter *report.
 	runnerConfig := &runner.Config{
 		// On Linux, Workdir will be like "/<parent_directory>/<owner>/<repo>"
 		// On Windows, Workdir will be like "\<parent_directory>\<owner>\<repo>"
-		Workdir:           filepath.FromSlash(fmt.Sprintf("/%s/%s", r.cfg.Container.WorkdirParent, preset.Repository)),
+		Workdir:           filepath.FromSlash(fmt.Sprintf("/%s/%s", strings.TrimLeft(r.cfg.Container.WorkdirParent, "/"), preset.Repository)),
 		BindWorkdir:       false,
 		ActionCacheDir:    filepath.FromSlash(r.cfg.Host.WorkdirParent),
 		ActionOfflineMode: r.cfg.Cache.OfflineMode,
