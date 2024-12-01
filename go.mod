@@ -1,6 +1,6 @@
 module gitea.com/gitea/act_runner
 
-go 1.22
+go 1.23
 
 require (
 	code.gitea.io/actions-proto-go v0.4.0
@@ -98,4 +98,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/nektos/act => github.com/TKaxv-7S/gitea-act v0.261.1-TK
+replace github.com/nektos/act => github.com/TKaxv-7S/gitea-act v0.261.3-TK
