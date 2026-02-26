@@ -1,13 +1,12 @@
 DIST := dist
 EXECUTABLE := act_runner
 GOFMT ?= gofumpt -l
-DIST := dist
 DIST_DIRS := $(DIST)/binaries $(DIST)/release
 GO ?= go
 SHASUM ?= shasum -a 256
 HAS_GO = $(shell hash $(GO) > /dev/null 2>&1 && echo "GO" || echo "NOGO" )
 XGO_PACKAGE ?= src.techknowlogick.com/xgo@latest
-XGO_VERSION := go-1.24.x
+XGO_VERSION := go-1.26.x
 GXZ_PAGAGE ?= github.com/ulikunitz/xz/cmd/gxz@v0.5.10
 
 LINUX_ARCHS ?= linux/amd64,linux/arm64
@@ -20,6 +19,8 @@ DOCKER_IMAGE ?= gitea/act_runner
 DOCKER_TAG ?= nightly
 DOCKER_REF := $(DOCKER_IMAGE):$(DOCKER_TAG)
 DOCKER_ROOTLESS_REF := $(DOCKER_IMAGE):$(DOCKER_TAG)-dind-rootless
+
+GOVULNCHECK_PACKAGE ?= golang.org/x/vuln/cmd/govulncheck@v1
 
 ifneq ($(shell uname), Darwin)
 	EXTLDFLAGS = -extldflags "-static" $(null)
@@ -102,7 +103,15 @@ fmt-check:
 		exit 1; \
 	fi;
 
-test: fmt-check
+.PHONY: deps-tools
+deps-tools: ## install tool dependencies
+	$(GO) install $(GOVULNCHECK_PACKAGE)
+
+.PHONY: security-check
+security-check: deps-tools
+	GOEXPERIMENT= $(GO) run $(GOVULNCHECK_PACKAGE) -show color ./...
+
+test: fmt-check security-check
 	@$(GO) test -v -cover -coverprofile coverage.txt ./... && echo "\n==>\033[32m Ok\033[m\n" || exit 1
 
 .PHONY: vet
